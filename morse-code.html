@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Morse Code</title>
+		<meta name="author" content="Guillermo Gonzalez">
+		<meta name="description" content="A Simple Morse Code Encoder & Decoder">
+
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" sizes="192x192" href="favicon.ico" type="image/x-icon">
+
+		<!--link rel="stylesheet" href="styles.css" type="text/css"-->
+		<style>
+			h1{
+				font-size: max(7vw, 3rem);
+				margin: 0;
+				line-height: 95%;
+			}
+
+			p{
+				font-size: max(1.8vw, 0.9rem);
+				margin: 0 5%;
+				margin-top: 0.5rem;
+				margin-bottom: 1rem;
+			}
+
+			textarea{
+				margin: 1% 5%;
+				width: 90%;
+				height: 210px;
+				resize: none;
+				font-size: max(1.5vw, 0.75rem);
+				outline: none;
+				border-radius: 0.5rem;
+				padding: 0.5rem;
+
+				-webkit-touch-callout: auto; 
+				-webkit-user-select: auto; 
+				-khtml-user-select: auto; 
+				-moz-user-select: auto; 
+				-ms-user-select: auto; 
+				user-select: auto;
+			}
+
+			input[type="radio"]{
+				width: 1rem;
+				height: 1rem;
+				margin: 0;
+				margin-left: 1rem;
+				margin-right: 0.2rem;
+			}
+
+			label{
+				font-size: 1.5rem;
+			}
+
+			textarea::-webkit-scrollbar{
+				width: 0;
+			}
+
+
+			/*My Standard Stuff Starts Here*/
+			*{
+				margin: 0;
+				padding: 0;
+				border: 0;
+				box-sizing: border-box;
+			}
+
+			body{
+				margin: 0;
+				height: 100%;
+				color: white;
+				text-align: center;
+				background: linear-gradient(-45deg, #FF5F6D, #FFC371);
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+				background-size: 400% 400%;
+				animation: gradient 15s ease infinite;
+			}
+
+			main{
+				animation: animationIn 2s;
+			}
+
+			hr{
+				border: 0;
+				clear: both;
+				display: block;
+				width: 100%;                
+				background-color:#FFFFFF;
+				height: 1px;
+			}
+
+			@keyframes animationIn{
+				from{
+					opacity: 0;
+					transform: translateY(-2rem);
+				}
+				to{
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			@keyframes gradient {
+				0% {
+					background-position: 0% 50%;
+				}
+				50% {
+					background-position: 100% 50%;
+				}
+				100% {
+					background-position: 0% 50%;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<h1>Morse Code</h1>
+			<hr>
+			<textarea placeholder="Text to Translate..." id="inputTextArea" oninput="findCode(); autoGrow(this);" spellcheck=false></textarea>
+			<input type="radio" name="encode" id="encode" checked=true onclick="changeCodingType()"><label>Encode</label></input><input type="radio" name="encode" id="decode" onclick="changeCodingType()"><label>Decode</label></input>
+			<p id="outputText"></p>
+		</main>
+
+		<!--script type="text/javascript" src="script.js"></script-->
+		<script>
+			const charInfo = { "0": "-----",  "1": ".----",  "2": "..---",  "3": "...--",  "4": "....-",  "5": ".....",  "6": "-....",  "7": "--...",  "8": "---..",  "9": "----.", "a": ".-", "b": "-...", "c": "-.-.", "d": "-..", "e": ".", "f": "..-.", "g": "--.", "h": "....", "i": "..", "j": ".---", "k": "-.-", "l": ".-..", "m": "--", "n": "-.", "o": "---", "p": ".--.", "q": "--.-", "r": ".-.", "s": "...", "t": "-", "u": "..-", "v": "...-", "w": ".--", "x": "-..-", "y": "-.--", "z": "--..", " ": "/", ".": ".-.-.-", "'": ".----.", "(": "-.--.", ":": "---...", "+": ".-.-.", "\"": ".-..-.", ",": "--..--", "!": "-.-.--", ")": "-.--.-", ";": "-.-.-.", "-": "-....-", "$": "...-..-", "?": "..--..", "/": "-..-.", "&": ".-...", "=": "-...-", "_": "..--.-", "@": ".--.-."}
+			const inverseCharInfo = { "-----": "0", ".----": "1", "..---": "2", "...--": "3", "....-": "4", ".....": "5", "-....": "6", "--...": "7", "---..": "8", "----.": "9", ".-": "a", "-...": "b", "-.-.": "c", "-..": "d", ".": "e", "..-.": "f", "--.": "g", "....": "h", "..": "i", ".---": "j", "-.-": "k", ".-..": "l", "--": "m", "-.": "n", "---": "o", ".--.": "p", "--.-": "q", ".-.": "r", "...": "s", "-": "t", "..-": "u", "...-": "v", ".--": "w", "-..-": "x", "-.--": "y", "--..": "z", "/": " ", ".-.-.-": ".", ".----.": "'", "-.--.": "(", "---...": ":", ".-.-.": "+", ".-..-.": "\"", "--..--": ",", "-.-.--": "!", "-.--.-": ")", "-.-.-.": ";", "-....-": "-", "...-..-": "$", "..--..": "?", "-..-.": "/", ".-...": "&", "-...-": "=", "..--.-": "_", ".--.-.": "@"}
+
+			var encode = true;
+			var savedInput = '';
+			var oldSavedInput = '';
+			const inputText = document.getElementById('inputTextArea');
+
+			function findCode(){
+				var inputedText = inputText.value.toLowerCase().replace('\n', ' ');
+				var outputText = '';     
+				
+				if(encode)
+				{        
+					for (var i = 0; i < inputedText.length; i++)
+						if(charInfo[inputedText[i]] !== undefined)
+							outputText += charInfo[inputedText[i]] + ' ';
+				}
+				else
+				{   
+					inputedText = (' ' + inputedText + ' ');
+					var stringToDecode = inputedText.split(' ');
+					for (var i = 0; i < stringToDecode.length; i++)
+						if(inverseCharInfo[stringToDecode[i]] !== undefined)
+							outputText += inverseCharInfo[stringToDecode[i]];  
+				}
+
+				if(document.getElementById('outputText').innerHTML !== outputText.toUpperCase())
+					document.getElementById('outputText').innerHTML = outputText.toUpperCase();
+			}
+
+			function autoGrow(element)
+			{
+				element.style.height = '5px';
+				element.style.height = ((element.scrollHeight > 210)? element.scrollHeight: '210') + 'px';
+			}
+
+			function changeCodingType()
+			{
+				encode = document.getElementById('encode').checked? true: false;
+				
+				oldSavedInput = savedInput;
+				savedInput = document.getElementById('inputTextArea').value;
+				document.getElementById('inputTextArea').value = oldSavedInput;
+				
+				findCode();
+				autoGrow(inputText);
+			}
+
+			inputText.addEventListener('keyup', findCode);
+
+			inputText.addEventListener('keyup', toCAPS);
+			function toCAPS() { if(encode) document.getElementById('inputTextArea').value = document.getElementById('inputTextArea').value.toUpperCase();}
+		</script>
+	</body>
+</html>

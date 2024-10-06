@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>YouTube Link Shortener</title>
+		<meta name="author" content="Guillermo Gonzalez">
+		<meta name="description" content="Simply Get the Shortened Version of YouTube URLs/Links">
+
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" sizes="192x192" href="favicon.ico" type="image/x-icon">
+		
+		<!--link rel="stylesheet" href="styles.css" type="text/css"-->
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				background-color: #f2f2f2;
+				margin: 0;
+				padding: 0;
+			}
+
+			.container {
+				max-width: 70%;
+				margin: 65px auto;
+				padding: 30px;
+				background-color: #ffffff;
+				border-radius: 10px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				text-align: center;
+			}
+
+			h1 {
+				font-size: 32px;
+				margin-bottom: 30px;
+				color: #333333;
+			}
+
+			input[type="text"] {
+				width: calc(100% - 20px);
+				padding: 12px;
+				margin-bottom: 20px;
+				border: 1px solid #cccccc;
+				border-radius: 6px;
+				box-sizing: border-box;
+				font-size: 16px;
+			}
+			
+			input[type="text"]::placeholder {
+				font-style: italic; 
+			}
+
+			button {
+				padding: 12px 24px;
+				background-color: #007bff;
+				color: #ffffff;
+				border: none;
+				border-radius: 6px;
+				cursor: pointer;
+				transition: background-color 0.3s ease;
+				font-size: 16px;
+			}
+
+			button:hover {
+				background-color: #0056b3;
+			}
+
+			@media screen and (max-width: 768px) {
+				.container {
+					max-width: 70%;
+					margin: 50px auto;
+					padding: 20px;
+				}
+
+				h1 {
+					font-size: 24px;
+				}
+			}
+		</style>		
+	</head>
+	<body>
+		<div class="container">
+			<h1>YouTube Link Shortener</h1>
+			<input type="text" id="youtubeUrl" placeholder="Video URL..." autocomplete="off">
+			<input type="text" id="shortenedUrl" readonly placeholder="Shortened URL..." onfocus="this.select()" readonly>
+			<button onclick="refreshPage()">Refresh Page</button>
+		</div>
+
+		<!--script src="script.js"></script-->
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				var youtubeUrlInput = document.getElementById('youtubeUrl');
+				var shortenedUrlInput = document.getElementById('shortenedUrl');
+		
+				youtubeUrlInput.focus(); // Set focus to the input field
+		
+				youtubeUrlInput.addEventListener('input', shortenUrl);
+		
+				function shortenUrl() {
+					var url = youtubeUrlInput.value.trim();
+					var shortenedUrl = '';
+		
+					if (isValidYouTubeUrl(url)) {
+						var videoId = extractYouTubeVideoId(url);
+						if (videoId) {
+							shortenedUrl = 'https://youtu.be/' + videoId;
+							shortenedUrlInput.value = shortenedUrl;
+							shortenedUrlInput.focus(); // Focus on the output field
+							shortenedUrlInput.select(); // Highlight the text in the output field
+							shortenedUrlInput.readOnly = true;
+							return; 
+						}
+					}
+		
+					shortenedUrlInput.value = '';
+					youtubeUrlInput.focus();
+				}
+
+				function isValidYouTubeUrl(url) {
+					return /^(?:https?:\/\/)?(?:www\.)?(?:m\.)?(?:youtube\.com\/(?:watch\?v=[\w-]{11}|embed\/[\w-]{11}|v\/[\w-]{11}|shorts\/[\w-]{11})|youtu\.be\/[\w-]{11})(?:\S+)?$/.test(url);
+				}
+
+				function extractYouTubeVideoId(url) {
+					var match = url.match(/(?:v=|\/v\/|\/embed\/|youtu\.be\/|\/shorts\/)([\w-]{11})/);
+					return match ? match[1] : null;
+				}
+			});
+		
+			function refreshPage() {
+				location.reload();
+			}
+		</script>
+	</body>
+</html>

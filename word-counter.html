@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Word Counter</title>
+		<meta name="author" content="Guillermo Gonzalez">
+		<meta name="description" content="A Simple Word & Character Counter">
+
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" sizes="192x192" href="favicon.ico" type="image/x-icon">
+
+		<!--link rel="stylesheet" href="styles.css" type="text/css"-->
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+				background-color: #f8f9fa;
+			}
+
+			.container {
+				width: 76%;
+				margin: 30px auto;
+				padding: 10px 15px;
+				background-color: #ffffff;
+				border-radius: 8px;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			}
+
+			textarea {
+				width: calc(100% - 12px);
+				height: 76vh;
+				margin: 0 auto;
+				padding: 5px;
+				font-size: 14px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				resize: none;
+			}
+
+			#counter {
+				font-size: min(44px, 6vw);
+				color: #777;
+				margin-bottom: 5px;
+				margin-top: 0px;
+				text-align: left;
+			}
+
+			#info {
+				font-size: min(14px, 3vw);
+				color: #777;
+				margin-top: 3px;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1 id="counter">Words: 0&nbsp;&nbsp;Characters: 0</h1>
+			<textarea id="textInput" autofocus></textarea>
+			<div id="info">Reading Time: 0m 0s | Speaking Time: 0m 0s</div>
+		</div>
+
+		<!--script type="text/javascript" src="script.js"></script-->
+		<script>
+			const textInput = document.getElementById('textInput');
+			const counter = document.getElementById('counter');
+			const info = document.getElementById('info');
+
+			const avgReadingSpeed = 275;
+			const avgSpeakingSpeed = 180;
+		
+			textInput.addEventListener('input', updateCounter);
+		
+			function updateCounter() {
+				const text = textInput.value.trim();
+				const words = text.split(/\s+/).filter(word => word.length > 0);
+				const wordCount = words.length;	
+				const charCount = text.replace(/\n/g, '').length;
+				counter.innerHTML = `Words: ${wordCount}&nbsp;&nbsp;Characters: ${charCount}`;
+		
+				const readingTime = calculateReadingTime(wordCount);
+				const speakingTime = calculateSpeakingTime(wordCount);
+				info.innerHTML = `Reading Time: ${readingTime} | Speaking Time: ${speakingTime}`;
+			}
+		
+			function calculateReadingTime(wordCount) {
+				const minutes = Math.floor(wordCount / avgReadingSpeed);
+				const seconds = Math.ceil((wordCount % avgReadingSpeed) / (avgReadingSpeed / 60));
+				return `${minutes}m ${seconds}s`;
+			}
+		
+			function calculateSpeakingTime(wordCount) {
+				const minutes = Math.floor(wordCount / avgSpeakingSpeed);
+				const seconds = Math.ceil((wordCount % avgSpeakingSpeed) / (avgSpeakingSpeed / 60));
+				return `${minutes}m ${seconds}s`;
+			}
+		
+			textInput.focus();
+		
+			textInput.addEventListener('paste', function() {
+				setTimeout(() => {
+					textInput.select();
+				}, 0);
+			});
+		
+			textInput.addEventListener('copy', function(event) {
+				event.preventDefault();
+				const selectedText = window.getSelection().toString();
+				event.clipboardData.setData('text/plain', selectedText);
+			});
+		</script>	
+	</body>
+</html>

@@ -1,0 +1,67 @@
+book,book_num,num_chapters,chapter_start
+Genesis,1,50,1
+Exodus,2,40,51
+Leviticus,3,27,91
+Numbers,4,36,118
+Deuteronomy,5,34,154
+Joshua,6,24,188
+Judges,7,21,212
+Ruth,8,4,233
+1 Samuel,9,31,237
+2 Samuel,10,24,268
+1 Kings,11,22,292
+2 Kings,12,25,314
+1 Chronicles,13,29,339
+2 Chronicles,14,36,368
+Ezra,15,10,404
+Nehemiah,16,13,414
+Esther,17,10,427
+Job,18,42,437
+Psalms,19,150,479
+Proverbs,20,31,629
+Ecclesiastes,21,12,660
+Song of Solomon,22,8,672
+Isaiah,23,66,680
+Jeremiah,24,52,746
+Lamentations,25,5,798
+Ezekiel,26,48,803
+Daniel,27,12,851
+Hosea,28,14,863
+Joel,29,3,877
+Amos,30,9,880
+Obadiah,31,1,889
+Jonah,32,4,890
+Micah,33,7,894
+Nahum,34,3,901
+Habakkuk,35,3,904
+Zephaniah,36,3,907
+Haggai,37,2,910
+Zechariah,38,14,912
+Malachi,39,4,926
+Matthew,40,28,930
+Mark,41,16,958
+Luke,42,24,974
+John,43,21,998
+Acts,44,28,1019
+Romans,45,16,1047
+1 Corinthians,46,16,1063
+2 Corinthians,47,13,1079
+Galatians,48,6,1092
+Ephesians,49,6,1098
+Philippians,50,4,1104
+Colossians,51,4,1108
+1 Thessalonians,52,5,1112
+2 Thessalonians,53,3,1117
+1 Timothy,54,6,1120
+2 Timothy,55,4,1126
+Titus,56,3,1130
+Philemon,57,1,1133
+Hebrews,58,13,1134
+James,59,5,1147
+1 Peter,60,5,1152
+2 Peter,61,3,1157
+1 John,62,5,1160
+2 John,63,1,1165
+3 John,64,1,1166
+Jude,65,1,1167
+Revelation,66,22,1168
