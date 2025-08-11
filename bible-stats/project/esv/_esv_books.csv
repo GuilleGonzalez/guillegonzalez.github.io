@@ -1,0 +1,67 @@
+book,book_num,num_chapters,num_verses,num_words
+Genesis,1,50,1533,36397
+Exodus,2,40,1213,31005
+Leviticus,3,27,859,23493
+Numbers,4,36,1288,31043
+Deuteronomy,5,34,959,27618
+Joshua,6,24,658,17993
+Judges,7,21,618,18312
+Ruth,8,4,85,2437
+1 Samuel,9,31,810,24168
+2 Samuel,10,24,695,19795
+1 Kings,11,22,816,23520
+2 Kings,12,25,719,22912
+1 Chronicles,13,29,942,18580
+2 Chronicles,14,36,822,24856
+Ezra,15,10,280,6921
+Nehemiah,16,13,406,9874
+Esther,17,10,167,5484
+Job,18,42,1070,17627
+Psalms,19,150,2461,41273
+Proverbs,20,31,915,14552
+Ecclesiastes,21,12,222,5376
+Song of Solomon,22,8,117,2576
+Isaiah,23,66,1292,35385
+Jeremiah,24,52,1364,40544
+Lamentations,25,5,154,3253
+Ezekiel,26,48,1273,37309
+Daniel,27,12,357,11272
+Hosea,28,14,197,4976
+Joel,29,3,73,1917
+Amos,30,9,146,4067
+Obadiah,31,1,21,614
+Jonah,32,4,48,1312
+Micah,33,7,105,3022
+Nahum,34,3,47,1111
+Habakkuk,35,3,56,1373
+Zephaniah,36,3,53,1573
+Haggai,37,2,38,1095
+Zechariah,38,14,211,6083
+Malachi,39,4,55,1752
+Matthew,40,28,1067,23019
+Mark,41,16,673,14596
+Luke,42,24,1149,25010
+John,43,21,866,18841
+Acts,44,28,1003,23633
+Romans,45,16,432,9530
+1 Corinthians,46,16,437,9314
+2 Corinthians,47,13,257,6077
+Galatians,48,6,149,3133
+Ephesians,49,6,155,3014
+Philippians,50,4,104,2160
+Colossians,51,4,95,1950
+1 Thessalonians,52,5,89,1854
+2 Thessalonians,53,3,47,1065
+1 Timothy,54,6,113,2314
+2 Timothy,55,4,83,1647
+Titus,56,3,46,928
+Philemon,57,1,25,461
+Hebrews,58,13,303,6935
+James,59,5,108,2331
+1 Peter,60,5,105,2405
+2 Peter,61,3,61,1549
+1 John,62,5,105,2507
+2 John,63,1,13,302
+3 John,64,1,15,303
+Jude,65,1,25,610
+Revelation,66,22,404,11526

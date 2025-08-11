@@ -1,0 +1,133 @@
+:root{
+	--defaultFontSize: max(1.3vw, 0.9rem);
+}
+
+h1{
+	font-size: calc(5 * var(--defaultFontSize));
+	margin: 1% 5%;
+	line-height: 80%;
+}
+
+h2{
+	font-size: calc(3.25 * var(--defaultFontSize));
+	margin: 0 5%;
+	margin-top: 1.5rem;
+}
+
+h3{
+	font-size: calc(2.75 * var(--defaultFontSize));
+	margin: 0 5%;
+	margin-top: 3rem;
+}
+
+p{
+	font-size: calc(2.25 * var(--defaultFontSize));
+	margin: 0 5%;
+}
+
+.mid-p{
+	font-size: calc(1.5 * var(--defaultFontSize));
+	margin: 0 5%;
+	margin-bottom: 1rem;
+}
+
+.sub-p{
+	font-size: calc(1 * var(--defaultFontSize));
+	margin: 0 5%;
+	margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 528px) {
+	h1{
+		font-size: 3rem;
+	}
+
+	h2{
+		font-size: 2.25rem;
+		margin-top: 0;
+	}
+
+	h3{
+		font-size: 1.8rem;
+		margin-top: 2rem;
+	}
+
+	p{
+		font-size: 1.6rem;
+	}
+	
+	.sub-p{
+		font-size: 0.8rem;
+	}
+
+	.mid-p{
+		font-size: 1.1rem;
+		margin-bottom: 0.5rem;
+	}
+}
+
+
+/*My Standard Stuff Starts Here*/
+a{
+	color: #ffffd9;
+}
+
+a:hover {
+  color: #ffff9f;
+  text-decoration: none;
+}
+
+*{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	box-sizing: border-box;
+}
+
+body{
+	margin: 0;
+	height: 100%;
+	color: white;
+	text-align: center;
+	background: linear-gradient(-45deg, #FF5F6D, #FFC371);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+
+main{
+	animation: animationIn 3s;
+}
+
+hr{
+	border: 0;
+	clear: both;
+	display: block;
+	width: 100%;                
+	background-color:#FFFFFF;
+	height: 1px;
+}
+
+@keyframes animationIn{
+	from{
+		opacity: 0;
+		transform: translateY(-3rem);
+	}
+	to{
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
