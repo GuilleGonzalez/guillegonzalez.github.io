@@ -10,6 +10,8 @@ description: My Personal Website
 
 &emsp; Hello there! I am Guillermo Gonzalez, a Christian who strongly values open-mindedness and epistemic humility. I am currently a freshman at the University of North Alabama, studying Engineering Technology. While computer science and math are my strong subjects, I am also deeply interested in psychology and sociology. One of my biggest passions in life is learning how to navigate human relationships with love, respect, and good communication. Outside of academics and the social sciences, I enjoy exploring financial literacy and general life management; in my extra free time, I like to play online chess, watch movies, speed cube, spend time outdoors, scroll YouTube Shorts, listen to music, and more.
 
+---
+
 ### Primary Profiles
 
 - <a href="https://www.linkedin.com/in/guille-gonzalez/" target="_blank">LinkedIn</a> - With 2.5k+ followers, I guess I am pretty established (though connections/followers often mean little). 
