@@ -21,7 +21,6 @@ description: My Personal Website
 - <a href="https://monkeytype.com/profile/guillegonzalez" target="_blank">Monkeytype</a> - Hovering in the 70-90 WPM range for everyday tasks, touch typing just feels like something I could not live without.
 - <a href="https://www.chess.com/member/guillegonzalez2025/stats" target="_blank">Chess.com</a> - Thanks to being taught chess at a young age, I am in the top 5% of players across multiple time formats on the site.
 - <a href="https://lichess.org/@/guillegonzalez2025" target="_blank">Lichess</a> - On this more competitive chess site, I rank in the top 20/25% for faster games and in the top 10% for 10-minute games.
-- <a href="https://humanbenchmark.com/users/688fe3ab417e5d0009c71084" target="_blank">Human Benchmark</a> - I usually score above average on typing and memory tests, though my reaction time and aim could use work.
 
 ---
 
