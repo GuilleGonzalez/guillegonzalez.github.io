@@ -1,14 +1,14 @@
 ---
 layout: default
 title: Guillermo Gonzalez
-date: 2025-09-28
+date: 2025-11-09
 author: Guillermo Gonzalez
 description: My Personal Website
 ---
 
 # Guillermo Gonzalez
 
-&emsp; Hello there! I am Guillermo Gonzalez, a Christian who strongly values open-mindedness and epistemic humility. I am currently a freshman at the University of North Alabama, studying Engineering Technology. While working with computers, programming, and math are my strong suits, I am also deeply interested in psychology and sociology. One of my biggest passions in life is learning how to navigate human relationships with love, respect, and good communication. Outside of academics and the social sciences, I enjoy exploring general life management and financial literacy; in my extra free time, I like to play online chess, exercise, spend time outdoors, try new things, watch movies, scroll YouTube Shorts, listen to music, and more.
+&emsp; Hello there! I am Guillermo Gonzalez, a Christian who strongly values open-mindedness and epistemic humility. I am currently a freshman at the University of North Alabama, studying Engineering Technology. While working with computers, programming, and math are my strong suits, I am also deeply interested in the humanities/social sciences. One of my biggest passions in life is learning how to navigate human relationships with love, respect, and good communication. Outside of academics and the social sciences, I enjoy exploring general life management and financial literacy; in my extra free time, I like to watch movies, exercise, try new things, spend time outdoors, listen to music, and more.
 
 ---
 
