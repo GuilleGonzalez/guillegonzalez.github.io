@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>PNG To JPEG Converter</title>
+        <meta name="author" content="Guillermo Gonzalez">
+        <meta name="description" content="A Simple, Beautiful, & Private Way to Convert Your Images">
+
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="favicon.ico" type="image/x-icon">
+        <link rel="icon" sizes="192x192" href="favicon.ico" type="image/x-icon">	
+
+        <!--link rel="stylesheet" href="styles.css" type="text/css"-->
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                background-color: #f0f2f5;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                color: #333;
+            }
+
+            .converter-container {
+                background-color: #ffffff;
+                padding: 40px;
+                border-radius: 12px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                width: 90%;
+                max-width: 400px;
+                transition: all 0.3s ease;
+            }
+
+            .converter-container:hover {
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            }
+
+            h1 {
+                margin-bottom: 20px;
+                font-size: 24px;
+                font-weight: 600;
+                color: #1a202c;
+            }
+
+            p {
+                margin-bottom: 30px;
+                color: #718096;
+            }
+
+            .upload-area {
+                border: 2px dashed #dbeafe;
+                border-radius: 8px;
+                padding: 40px 20px;
+                cursor: pointer;
+                transition: border-color 0.3s ease, background-color 0.3s ease;
+                margin-bottom: 20px;
+            }
+
+            .upload-area:hover, .upload-area.dragover {
+                border-color: #3b82f6;
+                background-color: #f7fafc;
+            }
+
+            .upload-area p {
+                margin: 0;
+                font-size: 16px;
+                color: #4a5568;
+            }
+
+            .upload-btn {
+                background-color: #3b82f6;
+                color: white;
+                padding: 12px 24px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: 600;
+                transition: background-color 0.3s ease;
+            }
+
+            .upload-btn:hover {
+                background-color: #2563eb;
+            }
+
+            #fileInput {
+                display: none;
+            }
+
+            #fileName {
+                margin-top: 15px;
+                font-style: italic;
+                color: #718096;
+            }
+
+            #downloadLink {
+                display: none;
+                background-color: #10b981;
+                color: white;
+                padding: 12px 24px;
+                text-decoration: none;
+                border-radius: 8px;
+                margin-top: 20px;
+                font-weight: 600;
+                transition: background-color 0.3s ease;
+            }
+
+            #downloadLink:hover {
+                background-color: #059669;
+            }
+
+            #loader {
+                display: none;
+                border: 4px solid #f3f3f3;
+                border-top: 4px solid #3b82f6;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                animation: spin 1s linear infinite;
+                margin: 20px auto;
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="converter-container">
+            <h1>PNG to JPEG Converter</h1>
+            <p>A simple, beautiful, and private way to convert your images.</p>
+
+            <div class="upload-area" id="uploadArea">
+                <p>Drag & Drop your PNG file here or</p>
+                <button class="upload-btn" id="uploadBtn">Choose File</button>
+                <input type="file" id="fileInput" accept="image/png">
+                <p id="fileName"></p>
+            </div>
+
+            <div id="loader"></div>
+            <a id="downloadLink">Download JPEG</a>
+        </div>
+
+        <script>
+            const uploadArea = document.getElementById('uploadArea');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const fileInput = document.getElementById('fileInput');
+            const fileNameDisplay = document.getElementById('fileName');
+            const loader = document.getElementById('loader');
+            const downloadLink = document.getElementById('downloadLink');
+
+            uploadBtn.addEventListener('click', () => fileInput.click());
+
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleFile(files[0]);
+                }
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                const files = e.target.files;
+                if (files.length > 0) {
+                    handleFile(files[0]);
+                }
+            });
+
+            function handleFile(file) {
+                if (file.type !== 'image/png') {
+                    alert('Please select a PNG file.');
+                    return;
+                }
+
+                const baseName = file.name.replace(/\.png$/i, '');
+                downloadLink.download = `${baseName}.jpeg`;
+
+                fileNameDisplay.textContent = `Selected file: ${file.name}`;
+                loader.style.display = 'block';
+                downloadLink.style.display = 'none';
+
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0);
+
+                        canvas.toBlob((blob) => {
+                            const url = URL.createObjectURL(blob);
+                            downloadLink.href = url;
+                            loader.style.display = 'none';
+                            downloadLink.style.display = 'inline-block';
+                        }, 'image/jpeg', 0.9);
+                    }
+                    img.src = event.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        </script>
+    </body>
+</html>
