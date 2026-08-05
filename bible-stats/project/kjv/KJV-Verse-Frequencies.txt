@@ -1,0 +1,115 @@
+Verses are in the King James Version (KJV) - which is in the Public Domain in the U.S.
+Bracketed words are equivalent to italicized words (English words added for fluidity from the translated original language) in traditionally printed KJV Bibles.
+The format is... {Number of Occurances} -> {The Verse in Parentheses} -> {All the Abbreviated Verse References Separated by Commas}
+
+72 -> "And the LORD spake unto Moses, saying," -> Ex 6:10, Ex 13:1, Ex 14:1, Ex 16:11, Ex 25:1, Ex 30:11, Ex 30:17, Ex 31:1, Ex 31:12, Ex 40:1, Le 4:1, Le 5:14, Le 6:1, Le 6:8, Le 6:19, Le 6:24, Le 7:22, Le 7:28, Le 8:1, Le 12:1, Le 14:1, Le 17:1, Le 18:1, Le 19:1, Le 20:1, Le 21:16, Le 22:1, Le 22:17, Le 22:26, Le 23:1, Le 23:9, Le 23:23, Le 23:26, Le 23:33, Le 24:1, Le 24:13, Le 27:1, Nu 3:5, Nu 3:11, Nu 3:44, Nu 4:21, Nu 5:1, Nu 5:5, Nu 5:11, Nu 6:1, Nu 6:22, Nu 7:4, Nu 8:1, Nu 8:5, Nu 8:23, Nu 9:9, Nu 10:1, Nu 13:1, Nu 15:1, Nu 15:17, Nu 15:37, Nu 16:23, Nu 16:36, Nu 16:44, Nu 17:1, Nu 18:25, Nu 20:7, Nu 25:10, Nu 25:16, Nu 26:52, Nu 27:6, Nu 28:1, Nu 31:1, Nu 31:25, Nu 34:1, Nu 34:16, Nu 35:9
+12 -> "One young bullock, one ram, one lamb of the first year, for a burnt offering:" -> Nu 7:15, Nu 7:21, Nu 7:27, Nu 7:33, Nu 7:39, Nu 7:45, Nu 7:51, Nu 7:57, Nu 7:63, Nu 7:69, Nu 7:75, Nu 7:81
+12 -> "One kid of the goats for a sin offering:" -> Nu 7:16, Nu 7:22, Nu 7:28, Nu 7:34, Nu 7:40, Nu 7:46, Nu 7:52, Nu 7:58, Nu 7:64, Nu 7:70, Nu 7:76, Nu 7:82
+12 -> "And the word of the LORD came unto me, saying," -> Eze 6:1, Eze 12:21, Eze 13:1, Eze 14:2, Eze 15:1, Eze 17:1, Eze 21:1, Eze 22:17, Eze 22:23, Eze 34:1, Eze 38:1, Zec 6:9
+10 -> "One golden spoon of ten [shekels], full of incense:" -> Nu 7:26, Nu 7:32, Nu 7:38, Nu 7:44, Nu 7:50, Nu 7:56, Nu 7:62, Nu 7:68, Nu 7:74, Nu 7:80
+8 -> "And the LORD spake unto Moses and unto Aaron, saying," -> Ex 7:8, Le 14:33, Nu 2:1, Nu 4:1, Nu 4:17, Nu 14:26, Nu 16:20, Nu 19:1
+8 -> "Moreover the word of the LORD came unto me, saying," -> Eze 7:1, Eze 17:11, Eze 20:45, Eze 22:1, Eze 28:11, Eze 35:1, Eze 36:16, Zec 4:8
+7 -> "His offering [was] one silver charger, the weight whereof [was] an hundred and thirty [shekels], one silver bowl of seventy shekels, after the shekel of the sanctuary; both of them full of fine flour mingled with oil for a meat offering:" -> Nu 7:25, Nu 7:37, Nu 7:49, Nu 7:61, Nu 7:67, Nu 7:73, Nu 7:79
+6 -> "Again the word of the LORD came unto me, saying," -> Jer 24:4, Eze 11:14, Eze 16:1, Eze 21:8, Eze 28:20, Eze 33:1
+6 -> "The word of the LORD came again unto me, saying," -> Eze 23:1, Eze 25:1, Eze 27:1, Eze 28:1, Eze 30:1, Eze 37:15
+5 -> "And their meat offering and their drink offerings for the bullocks, for the rams, and for the lambs, [shall be] according to their number, after the manner:" -> Nu 29:18, Nu 29:21, Nu 29:27, Nu 29:30, Nu 29:33
+4 -> "Then Job answered and said," -> Job 9:1, Job 16:1, Job 19:1, Job 23:1
+4 -> "Oh that [men] would praise the LORD [for] his goodness, and [for] his wonderful works to the children of men!" -> Ps 107:8, Ps 107:15, Ps 107:21, Ps 107:31
+4 -> "He that hath an ear, let him hear what the Spirit saith unto the churches." -> Re 2:29, Re 3:6, Re 3:13, Re 3:22
+3 -> "And one goat [for] a sin offering; beside the continual burnt offering, and his meat offering, and his drink offering." -> Nu 29:22, Nu 29:28, Nu 29:38
+3 -> "But Job answered and said," -> Job 6:1, Job 21:1, Job 26:1
+3 -> "Then answered Bildad the Shuhite, and said," -> Job 8:1, Job 18:1, Job 25:1
+3 -> "Then the word of the LORD came unto me, saying," -> Jer 1:4, Jer 13:8, Eze 33:23
+3 -> "The word that came to Jeremiah from the LORD, saying," -> Jer 7:1, Jer 11:1, Jer 30:1
+3 -> "Then came the word of the LORD unto Jeremiah, saying," -> Jer 29:30, Jer 32:26, Jer 35:12
+3 -> "Where their worm dieth not, and the fire is not quenched." -> Mr 9:44, Mr 9:46, Mr 9:48
+2 -> "The sons of Japheth; Gomer, and Magog, and Madai, and Javan, and Tubal, and Meshech, and Tiras." -> Ge 10:2, 1Ch 1:5
+2 -> "And the sons of Javan; Elishah, and Tarshish, Kittim, and Dodanim." -> Ge 10:4, 1Ch 1:7
+2 -> "And Mizraim begat Ludim, and Anamim, and Lehabim, and Naphtuhim," -> Ge 10:13, 1Ch 1:11
+2 -> "And the Hivite, and the Arkite, and the Sinite," -> Ge 10:17, 1Ch 1:15
+2 -> "And Joktan begat Almodad, and Sheleph, and Hazarmaveth, and Jerah," -> Ge 10:26, 1Ch 1:20
+2 -> "Duke Aholibamah, duke Elah, duke Pinon," -> Ge 36:41, 1Ch 1:52
+2 -> "Duke Kenaz, duke Teman, duke Mibzar," -> Ge 36:42, 1Ch 1:53
+2 -> "Thou shalt not kill." -> Ex 20:13, De 5:17
+2 -> "And blue, and purple, and scarlet, and fine linen, and goats’ [hair]," -> Ex 25:4, Ex 35:6
+2 -> "And rams’ skins dyed red, and badgers’ skins, and shittim wood," -> Ex 25:5, Ex 35:7
+2 -> "And the two kidneys, and the fat that [is] upon them, which [is] by the flanks, and the caul above the liver, with the kidneys, it shall he take away." -> Le 3:10, Le 3:15
+2 -> "And the owl, and the night hawk, and the cuckow, and the hawk after his kind," -> Le 11:16, De 14:15
+2 -> "Ye shall keep my sabbaths, and reverence my sanctuary: I [am] the LORD." -> Le 19:30, Le 26:2
+2 -> "From thirty years old and upward even unto fifty years old, every one that entereth into the service, for the work in the tabernacle of the congregation," -> Nu 4:39, Nu 4:43
+2 -> "His offering [was] one silver charger of the weight of an hundred and thirty [shekels], one silver bowl of seventy shekels, after the shekel of the sanctuary; both of them full of fine flour mingled with oil for a meat offering:" -> Nu 7:31, Nu 7:55
+2 -> "And he took up his parable, and said, Balaam the son of Beor hath said, and the man whose eyes are open hath said:" -> Nu 24:3, Nu 24:15
+2 -> "And one kid of the goats [for] a sin offering; beside the continual burnt offering, his meat offering, and his drink offering." -> Nu 29:16, Nu 29:25
+2 -> "And one goat [for] a sin offering; beside the continual burnt offering, his meat offering, and his drink offering." -> Nu 29:31, Nu 29:34
+2 -> "And the LORD spake unto Moses in the plains of Moab by Jordan [near] Jericho, saying," -> Nu 33:50, Nu 35:1
+2 -> "And Joshua returned, and all Israel with him, unto the camp to Gilgal." -> Jos 10:15, Jos 10:43
+2 -> "And Caleb said, He that smiteth Kirjathsepher, and taketh it, to him will I give Achsah my daughter to wife." -> Jos 15:16, Jg 1:12
+2 -> "According to all these words, and according to all this vision, so did Nathan speak unto David." -> 2Sa 7:17, 1Ch 17:15
+2 -> "There went up a smoke out of his nostrils, and fire out of his mouth devoured: coals were kindled by it." -> 2Sa 22:9, Ps 18:8
+2 -> "They prevented me in the day of my calamity: but the LORD was my stay." -> 2Sa 22:19, Ps 18:18
+2 -> "For I have kept the ways of the LORD, and have not wickedly departed from my God." -> 2Sa 22:22, Ps 18:21
+2 -> "It stood upon twelve oxen, three looking toward the north, and three looking toward the west, and three looking toward the south, and three looking toward the east: and the sea [was set] above upon them, and all their hinder parts [were] inward." -> 1Ki 7:25, 2Ch 4:4
+2 -> "And Solomon had horses brought out of Egypt, and linen yarn: the king’s merchants received the linen yarn at a price." -> 1Ki 10:28, 2Ch 1:16
+2 -> "And there was war between Asa and Baasha king of Israel all their days." -> 1Ki 15:16, 1Ki 15:32
+2 -> "And the word of the LORD came unto him, saying," -> 1Ki 17:2, 1Ki 17:8
+2 -> "And the word of the LORD came to Elijah the Tishbite, saying," -> 1Ki 21:17, 1Ki 21:28
+2 -> "And Jehoshaphat said unto the king of Israel, Inquire, I pray thee, at the word of the LORD to day." -> 1Ki 22:5, 2Ch 18:4
+2 -> "So the king of Israel and Jehoshaphat the king of Judah went up to Ramothgilead." -> 1Ki 22:29, 2Ch 18:28
+2 -> "And he did [that which was] evil in the sight of the LORD: he departed not from the sins of Jeroboam the son of Nebat, who made Israel to sin." -> 2Ki 15:24, 2Ki 15:28
+2 -> "How then wilt thou turn away the face of one captain of the least of my master’s servants, and put thy trust on Egypt for chariots and for horsemen?" -> 2Ki 18:24, Isa 36:9
+2 -> "And it came to pass, when king Hezekiah heard [it], that he rent his clothes, and covered himself with sackcloth, and went into the house of the LORD." -> 2Ki 19:1, Isa 37:1
+2 -> "So the servants of king Hezekiah came to Isaiah." -> 2Ki 19:5, Isa 37:5
+2 -> "So Rabshakeh returned, and found the king of Assyria warring against Libnah: for he had heard that he was departed from Lachish." -> 2Ki 19:8, Isa 37:8
+2 -> "And have cast their gods into the fire: for they [were] no gods, but the work of men’s hands, wood and stone: therefore they have destroyed them." -> 2Ki 19:18, Isa 37:19
+2 -> "But I know thy abode, and thy going out, and thy coming in, and thy rage against me." -> 2Ki 19:27, Isa 37:28
+2 -> "By the way that he came, by the same shall he return, and shall not come into this city, saith the LORD." -> 2Ki 19:33, Isa 37:34
+2 -> "So Sennacherib king of Assyria departed, and went and returned, and dwelt at Nineveh." -> 2Ki 19:36, Isa 37:37
+2 -> "And of thy sons that shall issue from thee, which thou shalt beget, shall they take away; and they shall be eunuchs in the palace of the king of Babylon." -> 2Ki 20:18, Isa 39:7
+2 -> "And he built altars for all the host of heaven in the two courts of the house of the LORD." -> 2Ki 21:5, 2Ch 33:5
+2 -> "And he did [that which was] evil in the sight of the LORD, according to all that his fathers had done." -> 2Ki 23:32, 2Ki 23:37
+2 -> "And the captain of the guard took Seraiah the chief priest, and Zephaniah the second priest, and the three keepers of the door:" -> 2Ki 25:18, Jer 52:24
+2 -> "And Nogah, and Nepheg, and Japhia," -> 1Ch 3:7, 1Ch 14:6
+2 -> "Glory ye in his holy name: let the heart of them rejoice that seek the LORD." -> 1Ch 16:10, Ps 105:3
+2 -> "[Saying], Touch not mine anointed, and do my prophets no harm." -> 1Ch 16:22, Ps 105:15
+2 -> "The children of Parosh, two thousand an hundred seventy and two." -> Ezr 2:3, Ne 7:8
+2 -> "The children of Shephatiah, three hundred seventy and two." -> Ezr 2:4, Ne 7:9
+2 -> "The children of Elam, a thousand two hundred fifty and four." -> Ezr 2:7, Ne 7:12
+2 -> "The children of Zaccai, seven hundred and threescore." -> Ezr 2:9, Ne 7:14
+2 -> "The children of Ater of Hezekiah, ninety and eight." -> Ezr 2:16, Ne 7:21
+2 -> "The men of Anathoth, an hundred twenty and eight." -> Ezr 2:23, Ne 7:27
+2 -> "The children of the other Elam, a thousand two hundred fifty and four." -> Ezr 2:31, Ne 7:34
+2 -> "The children of Harim, three hundred and twenty." -> Ezr 2:32, Ne 7:35
+2 -> "The children of Jericho, three hundred forty and five." -> Ezr 2:34, Ne 7:36
+2 -> "The priests: the children of Jedaiah, of the house of Jeshua, nine hundred seventy and three." -> Ezr 2:36, Ne 7:39
+2 -> "The children of Immer, a thousand fifty and two." -> Ezr 2:37, Ne 7:40
+2 -> "The children of Pashur, a thousand two hundred forty and seven." -> Ezr 2:38, Ne 7:41
+2 -> "The children of Harim, a thousand and seventeen." -> Ezr 2:39, Ne 7:42
+2 -> "The children of Bakbuk, the children of Hakupha, the children of Harhur," -> Ezr 2:51, Ne 7:53
+2 -> "The children of Neziah, the children of Hatipha." -> Ezr 2:54, Ne 7:56
+2 -> "All the Nethinims, and the children of Solomon’s servants, [were] three hundred ninety and two." -> Ezr 2:58, Ne 7:60
+2 -> "Then Eliphaz the Temanite answered and said," -> Job 4:1, Job 22:1
+2 -> "Then answered Zophar the Naamathite, and said," -> Job 11:1, Job 20:1
+2 -> "Moreover Job continued his parable, and said," -> Job 27:1, Job 29:1
+2 -> "Then Job answered the LORD, and said," -> Job 40:3, Job 42:1
+2 -> "The LORD of hosts [is] with us; the God of Jacob [is] our refuge. Selah." -> Ps 46:7, Ps 46:11
+2 -> "God hath spoken in his holiness; I will rejoice, I will divide Shechem, and mete out the valley of Succoth." -> Ps 60:6, Ps 108:7
+2 -> "Give us help from trouble: for vain [is] the help of man." -> Ps 60:11, Ps 108:12
+2 -> "Through God we shall do valiantly: for he [it is that] shall tread down our enemies." -> Ps 60:12, Ps 108:13
+2 -> "Let the people praise thee, O God; let all the people praise thee." -> Ps 67:3, Ps 67:5
+2 -> "O give thanks unto the LORD; for [he is] good: for his mercy [endureth] for ever." -> Ps 118:29, Ps 136:1
+2 -> "[Yet] a little sleep, a little slumber, a little folding of the hands to sleep:" -> Pr 6:10, Pr 24:33
+2 -> "The words of a talebearer [are] as wounds, and they go down into the innermost parts of the belly." -> Pr 18:8, Pr 26:22
+2 -> "I charge you, O ye daughters of Jerusalem, by the roes, and by the hinds of the field, that ye stir not up, nor awake [my] love, till he please." -> Song 2:7, Song 3:5
+2 -> "Moreover the word of the LORD came to me, saying," -> Jer 2:1, Eze 12:17
+2 -> "The word of the LORD came unto me again, saying," -> Eze 18:1, Eze 21:18
+2 -> "That it might be fulfilled which was spoken by Esaias the prophet, saying," -> Mt 4:14, Mt 12:17
+2 -> "For where your treasure is, there will your heart be also." -> Mt 6:21, Lu 12:34
+2 -> "For every one that asketh receiveth; and he that seeketh findeth; and to him that knocketh it shall be opened." -> Mt 7:8, Lu 11:10
+2 -> "And blessed is [he], whosoever shall not be offended in me." -> Mt 11:6, Lu 7:23
+2 -> "Blessed [is] that servant, whom his lord when he cometh shall find so doing." -> Mt 24:46, Lu 12:43
+2 -> "And when they had sung an hymn, they went out into the mount of Olives." -> Mt 26:30, Mr 14:26
+2 -> "But the days will come, when the bridegroom shall be taken away from them, and then shall they fast in those days." -> Mr 2:20, Lu 5:35
+2 -> "If any man have ears to hear, let him hear." -> Mr 4:23, Mr 7:16
+2 -> "Heaven and earth shall pass away: but my words shall not pass away." -> Mr 13:31, Lu 21:33
+2 -> "I tell you, Nay: but, except ye repent, ye shall all likewise perish." -> Lu 13:3, Lu 13:5
+2 -> "Grace [be] unto you, and peace, from God our Father, and [from] the Lord Jesus Christ." -> 1Co 1:3, Php 1:2

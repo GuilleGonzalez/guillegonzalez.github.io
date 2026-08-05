@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Memory Verses Flashcards</title>
+		<meta name="author" content="Guillermo Gonzalez">
+		<meta name="description" content="Flashcards for My Hand-Selected Memory Verses">
+
+		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+		<link rel="apple-touch-icon" href="../favicon.ico" type="image/x-icon">
+		<link rel="icon" sizes="192x192" href="../favicon.ico" type="image/x-icon">
+
+		<!--link rel="stylesheet" href="styles.css" type="text/css"-->
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				border: 0;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+			body {
+				font-family: Arial, sans-serif;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				height: 100vh;
+				margin: 0;
+				background-color: #f5f5f5;
+			}
+
+			.flashcard-container {
+				width: 80%;
+				max-width: 70vw;
+				perspective: 1000px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.flashcard {
+				width: 100%;
+				height: 70vh;
+				background-color: #fff;
+				box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				padding: 2vw;
+				border: 2px solid #ddd;
+				border-radius: 0.5vw;
+				touch-action: pan-y;
+			}
+
+			.flashcard-content {
+				user-select: none;
+				touch-action: none;
+			}
+
+			.flashcard-content p {
+				margin: 0;
+				font-size: max(1.7vw, 0.65rem);
+			}
+
+			.flashcard-navigation {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 80%;
+				max-width: 70vw;
+				margin-top: 2vh;
+			}
+
+			.button {
+				font-size: max(2.75vw, 1.1rem);
+				cursor: pointer;
+				margin: max(0.8vw, 0.75rem);
+				width: 3vw;
+				height: 3vw;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border: none;
+				border-radius: 50%;
+				transition: background-color 0.3s, color 0.3s;
+				padding: 0;
+			}
+
+			.button:hover {
+				transform: scale(1.2);
+				transition: transform 0.1s ease;
+			}
+
+			#shuffle-btn:hover,
+			#flip-btn:hover {
+				transform: scale(1.2);
+				transition: transform 0.1s ease;
+			}
+
+			button:focus {
+				outline: none;
+			}
+
+			#prev-arrow {
+				margin-right: 1.5vw;
+			}
+
+			#next-arrow {
+				margin-left: 1.5vw;
+			}
+
+			.flashcard-number {
+				font-size: max(2.25vw, 0.7rem);
+				color: #555;
+				margin: 0 1.5vw;
+			}
+
+			.fixed-button {
+				position: fixed;
+				bottom: 10px;
+				right: 10px;
+				background-color: #D3D3D3;
+				color: black;
+				padding: 6px 8px;
+				border-radius: 5px;
+				text-decoration: none;
+				font-size: min(1.8vw, 0.7rem);
+				z-index: 1000;
+			}
+
+			.fixed-button:hover {
+				transform: scale(1.05);
+				transition: transform 0.1s ease;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="flashcard-container" id="flashcard-container">
+			<div class="flashcard" id="flashcard">
+				<div class="flashcard-content" id="flashcard-content">
+					<p>Genesis 1:1-5 (KJV)</p>
+				</div>
+			</div>
+		</div>
+		<div class="flashcard-navigation" id="flashcard-navigation">
+			<button class="button" id="prev-arrow">⬅️</button>
+			<button class="button" id="shuffle-btn">🔀</button>
+			<div class="flashcard-number" id="flashcard-number">1/170</div>
+			<button class="button" id="flip-btn">🔄</button>
+			<button class="button" id="next-arrow">➡️</button>
+		</div>
+		<a href="https://guillegonzalez.github.io/memory-verses/" target="_blank" class="fixed-button">Go to Memory Verses</a>
+
+		<!--script src="script.js"></script-->
+		<script>
+			window.addEventListener('load', function() {
+				let isFlipped = false;
+				let currIdx = 0;
+				const flashcardsString = `
+Genesis 1:1-5 (KJV) -> In the beginning God created the heaven and the earth. And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters. And God said, Let there be light: and there was light. And God saw the light, that it was good: and God divided the light from the darkness. And God called the light Day, and the darkness he called Night. And the evening and the morning were the first day.
+Genesis 1:27 (ESV) -> So God created man in his own image, in the image of God he created him; male and female he created them.
+Creation Days (from Genesis 1-2) -> Day 1: Light & Darkness | Day 2: Expanse & Water | Day 3: Land & Vegetation | Day 4: Celestial Bodies | Day 5: Sea Creatures & Birds | Day 6: Land Creatures & Man | Day 7: God Rested.
+Genesis 3:15 (ESV) -> I will put enmity between you and the woman, and between your offspring and her offspring; he shall bruise your head, and you shall bruise his heel.
+Sons of Israel (from Genesis 29:31 to 30:24) -> Reuben, Simeon, Levi, Judah; Dan, Naphtali; Gad, Asher; Issachar, Zebulun; Joseph, Benjamin.
+Ten Plagues (from Exodus 7:14 to 12:32) -> Water to Blood, Frogs, Gnats, Flies, Livestock, Boils, Hail, Locust, Darkness, Death of Firstborn.
+Ten Commandments (from Exodus 20:1-17, Deuteronomy 5:6-21) -> No Other Gods, No Idols, Keep the Lord's Name Holy, Remember the Sabbath Day to Keep It Holy, Honor Your Father & Mother, Do Not Murder, Do Not Commit Adultery, Do Not Steal, Do Not Lie, Do Not Covet.
+Numbers 6:24-26 (NIV) -> The Lord bless you and keep you; the Lord make his face to shine upon you and be gracious to you; the Lord turn his face toward you and give you peace.
+Deuteronomy 6:4-5 (ESV) -> Hear, O Israel: The Lord our God, the Lord is one. You shall love the Lord your God with all your heart and with all your soul and with all your might.
+Joshua 1:9 (ESV) -> "Have I not commanded you? Be strong and courageous. Do not be frightened, and do not be dismayed, for the Lord your God is with you wherever you go."
+2 Chronicles 7:14 (ESV) -> If my people who are called by my name humble themselves, and pray and seek my face and turn from their wicked ways, then I will hear from heaven and will forgive their sin and heal their land.
+Job 1:21 (ESV) -> And he said, "Naked I came from my mother's womb, and naked shall I return. The Lord gave, and the Lord has taken away; blessed be the name of the Lord."
+Job 3:11 (ESV) -> Why did I not die at birth, come out from the womb and expire?
+Job 19:25 (KJV) -> For I know that my redeemer liveth, and that he shall stand at the latter day upon the earth.
+Psalm 1:1-2 (KJV) -> Blessed is the man that walketh not in the counsel of the ungodly, nor standeth in the way of sinners, nor sitteth in the seat of the scornful. But his delight is in the law of the Lord; and in his law doth he meditate day and night.
+Psalm 19:1-2 (KJV) -> The heavens declare the glory of God; and the firmament sheweth his handywork. Day unto day uttereth speech, and night unto night sheweth knowledge.
+Psalm 19:7-9 (KJV) -> The law of the Lord is perfect, converting the soul: the testimony of the Lord is sure, making wise the simple. The statutes of the Lord are right, rejoicing the heart: the commandment of the Lord is pure, enlightening the eyes. The fear of the Lord is clean, enduring for ever: the judgments of the Lord are true and righteous altogether.
+Psalm 23 (KJV) -> The Lord is my shepherd; I shall not want. He maketh me to lie down in green pastures: he leadeth me beside the still waters. He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake. Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me. Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over. Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the Lord for ever.
+Psalm 46:1 (KJV) -> God is our refuge and strength, a very present help in trouble.
+Psalm 51:7 (KJV) -> Purge me with hyssop, and I shall be clean: wash me, and I shall be whiter than snow.
+Psalm 51:10-12 (ESV) -> Create in me a clean heart, O God, and renew a right spirit within me. Cast me not away from your presence, and take not your Holy Spirit from me. Restore to me the joy of your salvation, and uphold me with a willing spirit.
+Psalm 56:3 (ESV) -> When I am afraid, I put my trust in you.
+Psalm 73:26 (ESV) -> My flesh and my heart may fail, but God is the strength of my heart and my portion forever.
+Psalm 100 (ESV) -> Make a joyful noise to the Lord, all the earth! Serve the Lord with gladness! Come into his presence with singing! Know that the Lord, he is God! It is he who made us, and we are his; we are his people, and the sheep of his pasture. Enter his gates with thanksgiving, and his courts with praise! Give thanks to him; bless his name! For the Lord is good; his steadfast love endures forever, and his faithfulness to all generations.
+Psalm 103:11-12 (ESV) -> For as high as the heavens are above the earth, so great is his steadfast love toward those who fear him; as far as the east is from the west, so far does he remove our transgressions from us.
+Psalm 117 (NIV) -> Praise the Lord, all you nations; extol him, all you peoples. For great is his love toward us, and the faithfulness of the Lord endures forever. Praise the Lord.
+Psalm 119:11 (NIV) -> I have hidden your word in my heart that I might not sin against you.
+Psalm 119:81 (ESV) -> My soul longs for your salvation; I hope in your word.
+Psalm 119:89 (KJV) -> For ever, O Lord, thy word is settled in heaven.
+Psalm 119:105 (ESV) -> Your word is a lamp to my feet and a light to my path.
+Psalm 136:1-4 (ESV) -> Give thanks to the Lord, for he is good, for his steadfast love endures forever. Give thanks to the God of gods, for his steadfast love endures forever. Give thanks to the Lord of lords, for his steadfast love endures forever; to him who alone does great wonders, for his steadfast love endures forever.
+Psalm 139:14 (ESV) -> I praise you, for I am fearfully and wonderfully made. Wonderful are your works; my soul knows it very well.
+Psalm 150:6 (ESV) -> Let everything that has breath praise the Lord! Praise the Lord!
+Proverbs 3:5-7 (KJV) -> Trust in the Lord with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths. Be not wise in thine own eyes: fear the Lord, and depart from evil.
+Proverbs 3:11-12 (KJV) -> My son, despise not the chastening of the Lord; neither be weary of his correction: For whom the Lord loveth he correcteth; even as a father the son in whom he delighteth.
+Proverbs 4:23 (KJV) -> Keep thy heart with all diligence; for out of it are the issues of life.
+Proverbs 6:6 (NIV) -> Go to the ant, you sluggard; consider its ways and be wise!
+Proverbs 9:9-10 (ESV) -> Give instruction to a wise man, and he will be still wiser; teach a righteous man, and he will increase in learning. The fear of the Lord is the beginning of wisdom, and the knowledge of the Holy One is insight.
+Proverbs 10:19 (KJV) -> In the multitude of words there wanteth not sin: but he that refraineth his lips is wise.
+Proverbs 11:14 (KJV) -> Where no counsel is, the people fall: but in the multitude of counsellors there is safety.
+Proverbs 11:25 (ESV) -> Whoever brings blessing will be enriched, and one who waters will himself be watered.
+Proverbs 12:1 (ESV) -> Whoever loves discipline loves knowledge, but he who hates reproof is stupid.
+Proverbs 13:12 (ESV) -> Hope deferred makes the heart sick, but a desire fulfilled is a tree of life.
+Proverbs 15:1 (ESV) -> A soft answer turns away wrath, but a harsh word stirs up anger.
+Proverbs 16:3 (NIV) -> Commit to the Lord whatever you do, and he will establish your plans.
+Proverbs 16:18 (NIV) -> Pride goes before destruction, a haughty spirit before a fall.
+Proverbs 17:22 (KJV) -> A merry heart doeth good like a medicine: but a broken spirit drieth the bones.
+Proverbs 20:19 (NIV) -> A gossip betrays a confidence; so avoid anyone who talks too much.
+Proverbs 21:21 (NIV) -> Whoever pursues righteousness and love finds life, prosperity and honor.
+Proverbs 24:9 (KJV) -> The thought of foolishness is sin: and the scorner is an abomination to men.
+Proverbs 26:4-5 (ESV) -> Answer not a fool according to his folly, lest you be like him yourself. Answer a fool according to his folly, lest he be wise in his own eyes.
+Proverbs 27:2 (NIV) -> Let someone else praise you, and not your own mouth; an outsider, and not your own lips.
+Ecclesiastes 3:1 (ESV) -> For everything there is a season, and a time for every matter under heaven.
+Ecclesiastes 12:13-14 (ESV) -> The end of the matter; all has been heard. Fear God and keep his commandments, for this is the whole duty of man. For God will bring every deed into judgment, with every secret thing, whether good or evil.
+Isaiah 25:1 (NIV) -> Lord, you are my God; I will exalt you and praise your name, for in perfect faithfulness you have done wonderful things, things planned long ago.
+Isaiah 40:8 (ESV) -> The grass withers, the flower fades, but the word of our God will stand forever.
+Isaiah 40:29 (NIV) -> He gives strength to the weary and increases the power of the weak.
+Isaiah 41:24 (ESV) -> Behold, you are nothing, and your work is less than nothing; an abomination is he who chooses you.
+Isaiah 53:1-6 (KJV) -> Who hath believed our report? and to whom is the arm of the Lord revealed? For he shall grow up before him as a tender plant, and as a root out of a dry ground: he hath no form nor comeliness; and when we shall see him, there is no beauty that we should desire him. He is despised and rejected of men; a man of sorrows, and acquainted with grief: and we hid as it were our faces from him; he was despised, and we esteemed him not. Surely he hath borne our griefs, and carried our sorrows: yet we did esteem him stricken, smitten of God, and afflicted. But he was wounded for our transgressions, he was bruised for our iniquities: the chastisement of our peace was upon him; and with his stripes we are healed. All we like sheep have gone astray; we have turned every one to his own way; and the Lord hath laid on him the iniquity of us all.
+Isaiah 55:8-9 (KJV) -> For my thoughts are not your thoughts, neither are your ways my ways, saith the Lord. For as the heavens are higher than the earth, so are my ways higher than your ways, and my thoughts than your thoughts.
+Jeremiah 17:9 (KJV) -> The heart is deceitful above all things, and desperately wicked: who can know it?
+Jeremiah 29:11 (NIV) -> "For I know the plans I have for you," declares the Lord, "plans to prosper you and not to harm you, plans to give you hope and a future."
+Ezekiel 36:26-27 (ESV) -> And I will give you a new heart, and a new spirit I will put within you. And I will remove the heart of stone from your flesh and give you a heart of flesh. And I will put my Spirit within you, and cause you to walk in my statutes and be careful to obey my rules.
+Hosea 6:6 (KJV) -> For I desired mercy, and not sacrifice; and the knowledge of God more than burnt offerings.
+Micah 6:8 (NIV) -> He has shown you, O mortal, what is good. And what does the Lord require of you? To act justly and to love mercy and to walk humbly with your God.
+Matthew 5:3-12 (ESV) + Luke 6:20-22 -> Blessed are the poor in spirit, for theirs is the kingdom of heaven. Blessed are those who mourn, for they shall be comforted. Blessed are the meek, for they shall inherit the earth. Blessed are those who hunger and thirst for righteousness, for they shall be satisfied. Blessed are the merciful, for they shall receive mercy. Blessed are the pure in heart, for they shall see God. Blessed are the peacemakers, for they shall be called sons of God. Blessed are those who are persecuted for righteousness' sake, for theirs is the kingdom of heaven. Blessed are you when others revile you and persecute you and utter all kinds of evil against you falsely on my account. Rejoice and be glad, for your reward is great in heaven, for so they persecuted the prophets who were before you.
+Matthew 5:44 (ESV) + Luke 6:27 -> But I say to you, Love your enemies and pray for those who persecute you.
+Matthew 6:9-13 (KJV) + Luke 11:2-4 -> After this manner therefore pray ye: Our Father which art in heaven, Hallowed be thy name. Thy kingdom come, Thy will be done in earth, as it is in heaven. Give us this day our daily bread. And forgive us our debts, as we forgive our debtors. And lead us not into temptation, but deliver us from evil: For thine is the kingdom, and the power, and the glory, for ever. Amen.
+Matthew 6:33 (KJV) -> Seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you.
+Matthew 6:34 (NIV) -> Do not worry about tomorrow, for tomorrow will worry about itself. Each day has enough trouble of its own.
+Matthew 7:3 & Luke 6:41 (ESV) -> Why do you see the speck that is in your brother's eye, but do not notice the log that is in your own eye?
+Matthew 7:7 (KJV) -> Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you.
+Matthew 7:12 (NIV) -> In everything, do to others what you would have them do to you, for this sums up the Law and the Prophets.
+Matthew 7:21 (NIV) -> Not everyone who says to me, "Lord, Lord," will enter the kingdom of heaven, but only the one who does the will of my Father who is in heaven.
+12 Apostles (from Matthew 10:2-4, Mark 3:16-19, Luke 6:14-16) -> Simon, Andrew, James, John, Phillip, Bartholomew, Thomas, Matthew, James the Less, Thaddaeus, Simon the Zealot, and Judas Iscariot.
+Matthew 11:28 (NIV) -> Come to me, all you who are weary and burdened, and I will give you rest.
+Matthew 16:25-26 (KJV) + Mark 8:35-36, Luke 9:24-25 -> For whosoever will save his life shall lose it: and whosoever will lose his life for my sake shall find it. For what is a man profited, if he shall gain the whole world, and lose his own soul? or what shall a man give in exchange for his soul?
+Matthew 22:37-40 (ESV) + Mark 12:29-31, Luke 10:27 -> And he said to him, "You shall love the Lord your God with all your heart and with all your soul and with all your mind. This is the great and first commandment. And a second is like it: You shall love your neighbor as yourself. On these two commandments depend all the Law and the Prophets."
+Matthew 28:19-20 (ESV) + Mark 16:15 -> Go therefore and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, teaching them to observe all that I have commanded you. And behold, I am with you always, to the end of the age.
+Mark 2:27 (KJV) -> And he said unto them, The sabbath was made for man, and not man for the sabbath:
+Luke 1:46-55 (ESV) -> And Mary said, "My soul magnifies the Lord, and my spirit rejoices in God my Savior, for he has looked on the humble estate of his servant. For behold, from now on all generations will call me blessed; for he who is mighty has done great things for me, and holy is his name. And his mercy is for those who fear him from generation to generation. He has shown strength with his arm; he has scattered the proud in the thoughts of their hearts; he has brought down the mighty from their thrones and exalted those of humble estate; he has filled the hungry with good things, and the rich he has sent away empty. He has helped his servant Israel, in remembrance of his mercy, as he spoke to our fathers, to Abraham and to his offspring forever."
+Luke 6:37 + Matthew 7:1 (KJV) -> Judge not, and ye shall not be judged: condemn not, and ye shall not be condemned: forgive, and ye shall be forgiven.
+Luke 19:10 (NIV) -> For the Son of Man came to seek and to save the lost.
+John 1:1-5 (ESV) -> In the beginning was the Word, and the Word was with God, and the Word was God. He was in the beginning with God. All things were made through him, and without him was not any thing made that was made. In him was life, and the life was the light of men. The light shines in the darkness, and the darkness has not overcome it.
+John 3:16-18 (KJV) -> For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life. For God sent not his Son into the world to condemn the world; but that the world through him might be saved. He that believeth on him is not condemned: but he that believeth not is condemned already, because he hath not believed in the name of the only begotten Son of God.
+John 5:24 (NIV) -> Very truly I tell you, whoever hears my word and believes him who sent me has eternal life and will not be judged but has crossed over from death to life.
+John 6:37 (NIV) -> All those the Father gives me will come to me, and whoever comes to me I will never drive away.
+John 8:58 (ESV) -> Jesus said to them, "Truly, truly, I say to you, before Abraham was, I am."
+John 11:25 (NIV) -> Jesus said to her, "I am the resurrection and the life. The one who believes in me will live, even though they die."
+John 14:1 (NIV) -> Do not let your hearts be troubled. You believe in God; believe also in Me.
+John 14:6 (ESV) -> Jesus said to him, "I am the way, and the truth, and the life. No one comes to the Father except through me."
+John 14:14-15 (ESV) -> If you ask me anything in my name, I will do it. If ye love me, keep my commandments.
+John 15:12 (ESV) -> This is my commandment, that you love one another as I have loved you.
+Acts 1:8 (ESV) -> But you will receive power when the Holy Spirit has come upon you, and you will be my witnesses in Jerusalem and in all Judea and Samaria, and to the end of the earth.
+Romans 1:16-17 (KJV) -> For I am not ashamed of the gospel of Christ: for it is the power of God unto salvation to every one that believeth; to the Jew first, and also to the Greek. For therein is the righteousness of God revealed from faith to faith: as it is written, The just shall live by faith.
+Romans 1:22 (KJV) -> Claiming to be wise, they became fools,
+Romans 3:10-12 (KJV) -> As it is written, There is none righteous, no, not one: There is none that understandeth, there is none that seeketh after God. They are all gone out of the way, they are together become unprofitable; there is none that doeth good, no, not one.
+Romans 3:23 (ESV) -> For all have sinned and fall short of the glory of God.
+Romans 6:23 (KJV) -> For the wages of sin is death; but the gift of God is eternal life through Jesus Christ our Lord.
+Romans 8:28 (KJV) -> We know that all things work together for good to them that love God, to them who are the called according to his purpose.
+Romans 8:31 (KJV) -> What shall we then say to these things? If God be for us, who can be against us?
+Romans 8:38-39 (KJV) -> For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come, Nor height, nor depth, nor any other creature, shall be able to separate us from the love of God, which is in Christ Jesus our Lord.
+Romans 10:9-10 (KJV) -> That if thou shalt confess with thy mouth the Lord Jesus, and shalt believe in thine heart that God hath raised him from the dead, thou shalt be saved. For with the heart man believeth unto righteousness; and with the mouth confession is made unto salvation.
+Romans 11:33 (KJV) -> O the depth of the riches both of the wisdom and knowledge of God! how unsearchable are his judgments, and his ways past finding out!
+Romans 12:1-2 (KJV) -> I beseech you therefore, brethren, by the mercies of God, that ye present your bodies a living sacrifice, holy, acceptable unto God, which is your reasonable service. And be not conformed to this world: but be ye transformed by the renewing of your mind, that ye may prove what is that good, and acceptable, and perfect, will of God.
+Romans 12:9-21 (KJV) -> Let love be without dissimulation. Abhor that which is evil; cleave to that which is good. Be kindly affectioned one to another with brotherly love; in honour preferring one another; Not slothful in business; fervent in spirit; serving the Lord; Rejoicing in hope; patient in tribulation; continuing instant in prayer; Distributing to the necessity of saints; given to hospitality. Bless them which persecute you: bless, and curse not. Rejoice with them that do rejoice, and weep with them that weep. Be of the same mind one toward another. Mind not high things, but condescend to men of low estate. Be not wise in your own conceits. Recompense to no man evil for evil. Provide things honest in the sight of all men. If it be possible, as much as lieth in you, live peaceably with all men. Dearly beloved, avenge not yourselves, but rather give place unto wrath: for it is written, Vengeance is mine; I will repay, saith the Lord. Therefore if thine enemy hunger, feed him; if he thirst, give him drink: for in so doing thou shalt heap coals of fire on his head. Be not overcome of evil, but overcome evil with good.
+Romans 13:1 (ESV) -> Let every person be subject to the governing authorities. For there is no authority except from God, and those that exist have been instituted by God.
+1 Corinthians 10:13 (KJV) -> There hath no temptation taken you but such as is common to man: but God is faithful, who will not suffer you to be tempted above that ye are able; but will with the temptation also make a way to escape, that ye may be able to bear it.
+1 Corinthians 10:31 (NIV) -> So whether you eat or drink or whatever you do, do it all for the glory of God.
+1 Corinthians 13 (KJV) -> Though I speak with the tongues of men and of angels, and have not charity, I am become as sounding brass, or a tinkling cymbal. And though I have the gift of prophecy, and understand all mysteries, and all knowledge; and though I have all faith, so that I could remove mountains, and have not charity, I am nothing. And though I bestow all my goods to feed the poor, and though I give my body to be burned, and have not charity, it profiteth me nothing. Charity suffereth long, and is kind; charity envieth not; charity vaunteth not itself, is not puffed up, Doth not behave itself unseemly, seeketh not her own, is not easily provoked, thinketh no evil; Rejoiceth not in iniquity, but rejoiceth in the truth; Beareth all things, believeth all things, hopeth all things, endureth all things. Charity never faileth: but whether there be prophecies, they shall fail; whether there be tongues, they shall cease; whether there be knowledge, it shall vanish away. For we know in part, and we prophesy in part. But when that which is perfect is come, then that which is in part shall be done away. When I was a child, I spake as a child, I understood as a child, I thought as a child: but when I became a man, I put away childish things. For now we see through a glass, darkly; but then face to face: now I know in part; but then shall I know even as also I am known. And now abideth faith, hope, charity, these three; but the greatest of these is charity.
+1 Corinthians 15:55-57 (KJV) -> O death, where is thy sting? O grave, where is thy victory? The sting of death is sin; and the strength of sin is the law. But thanks be to God, which giveth us the victory through our Lord Jesus Christ.
+1 Corinthians 16:13-14 (NIV) -> Be on your guard; stand firm in the faith; be courageous; be strong. Do everything in love.
+2 Corinthians 4:5 (ESV) -> For what we proclaim is not ourselves, but Jesus Christ as Lord, with ourselves as your servants for Jesus' sake.
+2 Corinthians 5:7 (NIV) -> For we live by faith, not by sight.
+2 Corinthians 5:17 (ESV) -> Therefore, if anyone is in Christ, he is a new creation. The old has passed away; behold, the new has come.
+2 Corinthians 5:21 (ESV) -> For our sake he made him to be sin who knew no sin, so that in him we might become the righteousness of God.
+2 Corinthians 9:7 (ESV) -> Each one must give as he has decided in his heart, not reluctantly or under compulsion, for God loves a cheerful giver.
+Galatians 2:20 (ESV) -> I have been crucified with Christ. It is no longer I who live, but Christ who lives in me. And the life I now live in the flesh I live by faith in the Son of God, who loved me and gave himself for me.
+Galatians 5:22-23 (KJV) -> But the fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith, Meekness, temperance: against such there is no law.
+Galatians 5:25 (KJV) -> If we live in the Spirit, let us also walk in the Spirit.
+Galatians 6:7 (KJV) -> Be not deceived; God is not mocked: for whatsoever a man soweth, that shall he also reap.
+Ephesians 1:7 (NIV) -> In him we have redemption through his blood, the forgiveness of sins, in accordance with the riches of God's grace
+Ephesians 2:8-10 (KJV) -> For by grace are ye saved through faith; and that not of yourselves: it is the gift of God: Not of works, lest any man should boast. For we are his workmanship, created in Christ Jesus unto good works, which God hath before ordained that we should walk in them.
+Ephesians 4:1-3 (KJV) -> I therefore, the prisoner of the Lord, beseech you that ye walk worthy of the vocation wherewith ye are called, With all lowliness and meekness, with longsuffering, forbearing one another in love; Endeavouring to keep the unity of the Spirit in the bond of peace.
+Ephesians 4:29 (NIV) -> Do not let any unwholesome talk come out of your mouths, but only what is helpful for building others up according to their needs, that it may benefit those who listen.
+Ephesians 4:32 (NIV) -> Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.
+Ephesians 6:11-12 (NIV) -> Put on the full armor of God, so that you can take your stand against the devil's schemes. For our struggle is not against flesh and blood, but against the rulers, against the authorities, against the powers of this dark world and against the spiritual forces of evil in the heavenly realms.
+Armor of God (from Ephesians 6:10-18) -> The Belt of Truth, The Breastplate of Righteousness, The Shoes of the Gospel of Peace, The Shield of Faith, The Helmet of Salvation, The Sword of the Spirit (the Word of God), Prayer & Supplication.
+Philippians 2:3 (NIV) -> Do nothing out of selfish ambition or vain conceit. Rather, in humility value others above yourselves,
+Philippians 4:4 (KJV) -> Rejoice in the Lord always: and again I say, Rejoice.
+Philippians 4:6-8 (KJV) -> Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus. Finally, brethren, whatsoever things are true, whatsoever things are honest, whatsoever things are just, whatsoever things are pure, whatsoever things are lovely, whatsoever things are of good report; if there be any virtue, and if there be any praise, think on these things.
+Philippians 4:13 (KJV) -> I can do all things through Christ which strengtheneth me.
+Colossians 3:19 (NIV) -> Husbands, love your wives and do not be harsh with them.
+Colossians 3:23-24 (NIV) -> Whatever you do, work at it with all your heart, as working for the Lord, not for human masters, since you know that you will receive an inheritance from the Lord as a reward. It is the Lord Christ you are serving.
+Colossians 4:2 (KJV) -> Continue in prayer, and watch in the same with thanksgiving.
+1 Thessalonians 5:16-22 (ESV) -> Rejoice always, pray without ceasing, give thanks in all circumstances; for this is the will of God in Christ Jesus for you. Do not quench the Spirit. Do not despise prophecies, but test everything; hold fast what is good. Abstain from every form of evil.
+2 Timothy 1:7 (KJV) -> For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.
+2 Timothy 3:1 (NIV) -> Mark this: There will be terrible times in the last days.
+2 Timothy 3:16-17 (NIV) -> All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness, so that the servant of God may be thoroughly equipped for every good work.
+Hebrews 4:16 (ESV) -> Let us then with confidence draw near to the throne of grace, that we may receive mercy and find grace to help in time of need.
+Hebrews 11:1 (KJV) -> Now faith is the substance of things hoped for, the evidence of things not seen.
+Hebrews 13:8 (ESV) -> Jesus Christ is the same yesterday and today and forever.
+Hebrews 13:25 (ESV) -> Grace be with all of you.
+James 1:2 (ESV) -> Count it all joy, my brothers, when you meet trials of various kinds.
+James 1:5 (ESV) -> If any of you lacks wisdom, let him ask God, who gives generously to all without reproach, and it will be given him.
+James 1:13 (KJV) -> Let no man say when he is tempted, I am tempted of God: for God cannot be tempted with evil, neither tempteth he any man:
+James 1:17 (ESV) -> Every good gift and every perfect gift is from above, coming down from the Father of lights, with whom there is no variation or shadow due to change.
+James 1:19 (NIV) -> My dear brothers and sisters, take note of this: Everyone should be quick to listen, slow to speak and slow to become angry.
+James 1:22 (NIV) -> Do not merely listen to the word, and so deceive yourselves. Do what it says.
+James 4:10 (KJV) -> Humble yourselves in the sight of the Lord, and he shall lift you up.
+James 5:16 (ESV) -> Therefore, confess your sins to one another and pray for one another, that you may be healed. The prayer of a righteous person has great power as it is working.
+1 Peter 3:15 (ESV) -> In your hearts honor Christ the Lord as holy, always being prepared to make a defense to anyone who asks you for a reason for the hope that is in you; yet do it with gentleness and respect.
+1 Peter 4:8 (NIV) -> Above all, love each other deeply, because love covers over a multitude of sins.
+1 Peter 5:8 (KJV) -> Be sober, be vigilant; because your adversary the devil, as a roaring lion, walketh about, seeking whom he may devour.
+1 John 1:8-9 (ESV) -> If we say we have no sin, we deceive ourselves, and the truth is not in us. If we confess our sins, he is faithful and just to forgive us our sins and to cleanse us from all unrighteousness.
+1 John 2:15 (NIV) -> Do not love the world or anything in the world. If anyone loves the world, love for the Father is not in them.
+1 John 4:8 (ESV) -> Anyone who does not love does not know God, because God is love.
+1 John 4:19 (NIV) -> We love because he first loved us.
+Jude 1:2 (NIV) -> Mercy, peace and love be yours in abundance.
+Revelation 3:20 (KJV) -> Behold, I stand at the door, and knock: if any man hear my voice, and open the door, I will come in to him, and will sup with him, and he with me.
+Revelation 22:13 (ESV) -> I am the Alpha and the Omega, the first and the last, the beginning and the end.
+Romans 1:7b, 1 Corinthians 1:3, 2 Corinthians 1:2, Galatians 1:3-4, Ephesians 1:2, Philippians 1:2, 2 Thessalonians 1:2, Philemon 1:3 (ESV) -> Grace to you and peace from God our Father and the Lord Jesus Christ.
+The Five Solas of the Reformation -> Sola Scriptura | Sola Fide | Sola Gratia | Solus Christus | Soli Deo Gloria - "We are saved by grace alone through faith alone, in Christ alone, for the glory of God alone, as revealed in Scripture alone."
+ACTS (for Prayer) -> Adoration, Confession, Thanksgiving, [Intercession,] Supplication
+TULIP -> Total Depravity, Unconditional Election, Limited Atonement, Irresistible Grace, Perseverance of the Saints
+Story of the Bible -> God, Man, Christ, Decision | Creation, Fall, Redemption, Restoration
+Books of the Bible -> Genesis, Exodus, Leviticus, Numbers, Deuteronomy, Joshua, Judges, Ruth, 1 Samuel, 2 Samuel, 1 Kings, 2 Kings, 1 Chronicles, 2 Chronicles, Ezra, Nehemiah, Esther, Job , Psalm, Proverbs, Ecclesiastes, Song of Solomon, Isaiah, Jeremiah, Lamentations, Ezekiel, Daniel, Hosea, Joel, Amos, Obadiah, Jonah, Micah, Nahum, Habakkuk, Zephaniah, Haggai, Zechariah, Malachi | Matthew, Mark, Luke, John, Acts, Romans, 1 Corinthians, 2 Corinthians, Galatians, Ephesians, Philippians, Colossians, 1 Thessalonians, 2 Thessalonians, 1 Timothy, 2 Timothy, Titus, Philemon, Hebrews, James, 1 Peter, 2 Peter, 1 John, 2 John, 3 John, Jude, Revelation
+The Apostles' Creed -> I believe in God the Father Almighty, Maker of heaven and earth. I believe in Jesus Christ, his only-begotten Son, our  Lord; who was conceived by the Holy Spirit, born of the Virgin Mary suffered under Pontius Pilate; was crucified, dead, and buried; he descended into hell; the third day he rose again from the dead; he ascended into heaven, and sits at the right hand of God the Father Almighty; from there he shall come to judge the living and the dead. I believe in the Holy Spirit; the holy catholic church; the communion of saints; the forgiveness of sins; the resurrection of the body; and the life everlasting. Amen.
+The Nicene Creed -> I believe in one God, the Father Almighty, Maker of heaven and earth, and of all things visible and invisible. And in one Lord Jesus Christ, the only-begotten Son of God, begotten of the Father before all worlds; God of God, Light of Light, very God of very God, begotten, not made, being of one substance with the Father, by whom all things were made. Who, for us men and for our salvation, came down from heaven and was incarnate by the Holy Spirit of the Virgin Mary, and was made man; and was crucified also for us under Pontius Pilate; he suffered and was buried; and the third day he rose again, according to the Scriptures; and ascended into heaven, and sits on the right hand of the Father; and he shall come again, with glory, to judge the living and the dead; whose kingdom shall have no end. And I believe in the Holy Spirit, the Lord and  Giver of life; who proceeds from the Father and the Son; who with the Father and the Son together is worshiped and glorified; who spoke by the prophets. And I believe in one holy catholic and apostolic church. I acknowledge on baptism for the remission of sins; and I look for the resurrection of the dead, and the life of the world to come. Amen.
+Heidelberg Catechism A1 -> I am not my own, but belong - body and soul, in life and in death - to my faithful Savior, Jesus Christ. He has fully paid for all my sins with His precious blood, and has delivered me from the tyranny of the devil. He also watches over me in such a way that not a hair can fall from my head without the will of my Father in heaven; in fact, all things must work together for my salvation. Because I belong to him, Christ, by His Holy Spirit, also assures me of eternal life and makes me wholeheartedly willing and ready from now on to live for him.
+				`;
+
+				const flashcards = parseFlashcards(flashcardsString);
+				updateCard();
+
+				document.getElementById('flashcard').addEventListener('click', toggleCard);
+				document.getElementById('next-arrow').addEventListener('click', nextCard);
+				document.getElementById('shuffle-btn').addEventListener('click', shuffleFlashcards);
+
+				document.getElementById("shuffle-btn").addEventListener("keydown", function(event) {
+					if (event.key === "Enter") event.preventDefault();
+				});
+				document.getElementById('flip-btn').addEventListener('click', flipAllCards);
+				document.getElementById('prev-arrow').addEventListener('click', prevCard);
+
+				document.addEventListener('keydown', function (event) {
+					if (event.key === 'ArrowLeft' || event.key === 'a') prevCard();
+					else if (event.key === 'ArrowRight' || event.key === 'd') nextCard();
+					else if (event.key === ' ' || event.key === 'ArrowUp' || event.key === 'ArrowDown' || event.key === 'w' || event.key === 's')
+						toggleCard();
+				});
+
+				//#region Swipe Functionality
+				let touchStartX = 0, swipeProcessed = false;
+				document.getElementById('flashcard').addEventListener('touchstart', handleTouchStart);
+				document.getElementById('flashcard').addEventListener('touchmove', handleTouchMove);
+
+				function handleTouchStart(event) {
+					touchStartX = event.touches[0].clientX;
+					swipeProcessed = false; // Reset the flag when a new touch event starts
+				}
+
+				const SWIPE_THRESHOLD_PERCENT = 10;
+				function handleTouchMove(event) {
+					if (swipeProcessed) return;
+					const touchEndX = event.touches[0].clientX;
+					const swipeDistance = touchStartX - touchEndX;
+
+					const viewportWidth = window.innerWidth;
+					const swipeThreshold = (viewportWidth * SWIPE_THRESHOLD_PERCENT) / 100;
+
+					if (Math.abs(swipeDistance) > swipeThreshold) {
+						if (swipeDistance > 0) nextCard();
+						else prevCard();
+						swipeProcessed = true;
+					}
+				}
+				//#endregion
+
+				//#region Flashcard Button Functionality
+				function nextCard() {
+					if (currIdx < flashcards.length - 1) {
+						currIdx = (currIdx + 1) % flashcards.length;
+						isFlipped = false; // Reset to front content when changing cards
+						updateCard();
+					}
+				}
+
+				function prevCard() {
+					if (currIdx > 0) {
+						currIdx = (currIdx - 1 + flashcards.length) % flashcards.length;
+						isFlipped = false; // Reset to front content when changing cards
+						updateCard();
+					}
+				}
+
+				function shuffleFlashcards() {
+					currIdx = 0
+
+					// Fisher-Yates shuffle algorithm
+					for (let i = flashcards.length - 1; i > 0; i--) {
+						const j = Math.floor(Math.random() * (i + 1));
+						[flashcards[i], flashcards[j]] = [flashcards[j], flashcards[i]];
+					}
+
+					flashcards.forEach((flashcard, index) => {
+						console.log(`Shuffled Flashcard ${index + 1} -> ${flashcard.front}`);
+					});
+
+					updateCard();
+				}
+
+				function flipAllCards() {
+					flashcards.forEach(card => {
+						const temp = card.front;
+						card.front = card.back;
+						card.back = temp;
+					});
+
+					isFlipped = false;
+					updateCard();
+				}
+				//#endregion
+
+				function toggleCard() {
+					isFlipped = !isFlipped;
+					updateCard();
+				}
+
+				function updateCard() {
+					const content = isFlipped ? flashcards[currIdx].back : flashcards[currIdx].front;
+					const flashcardNumber = `${currIdx + 1}/${flashcards.length}`;
+					document.getElementById('flashcard-content').innerHTML = `<p>${content}</p>`;
+					document.getElementById('flashcard-number').innerText = flashcardNumber;
+				}
+
+				function parseFlashcards(str) {
+					return str.split('\n').map(line => {
+						const [front = '', back = ''] = line.split('->').map(part => part.trim());
+						if (front === '') return null; // Exclude cards with no front content
+						return { front, back };
+					}).filter(card => card !== null);
+				}
+			});
+		</script>	
+	</body>
+</html>
